@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "intent": "PostGif",
+      "slots": [
+        {
+          "name": "Keywords",
+          "type": "AMAZON.LITERAL"
+        }
+      ]
+    }
+  ]
+}
