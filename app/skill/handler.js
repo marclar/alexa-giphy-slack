@@ -1,6 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
+var giphy = require('giphy-api')();
+var Promise = require('bluebird');
 var response = require('./response.json');
 
 module.exports.handler = function(event, context) {
@@ -24,15 +26,50 @@ module.exports.handler = function(event, context) {
   };
 
   try {
+
+    //Get search term
     var keywords = event.body.request.intent.slots.Keywords.value;
 
-    result.response.outputSpeech.text = keywords;
+    //Query Giphy API
+    giphy.search(keywords, function(err, res) {
+      if(err){
+        console.log('err:', err);
+        throw err;
+      }
+      else {
+
+        //End session
+        result.response.shouldEndSession = true;
+
+        //If there's a result,
+        var url = null;
+        if(res.data && res.data.length){
+          url = res.data[0].url;
+        }
+
+        //If there's a url,
+        if(url){
+
+          //Send to Slack
+          result.response.outputSpeech.text = url;
+
+          return context.done(null, result);
+
+        }
+        else {
+
+          //No results
+          result.response.outputSpeech.text = "I'm sorry, but I found no results for that phrase.";
+          return context.done(null, result);
+
+        }
+
+      }
+    });
 
   }
   catch(e){
     result.response.outputSpeech.text = "Error. Error. Error.";
-  }
-  finally {
     return context.done(null, result);
   }
 
