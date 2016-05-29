@@ -1,1 +1,1 @@
-# alexa-giphy-slack
+# alexa-skills

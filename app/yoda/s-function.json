@@ -1,0 +1,47 @@
+{
+  "name": "yoda",
+  "runtime": "nodejs4.3",
+  "description": "Serverless Lambda function for project: alexa-skills",
+  "customName": false,
+  "customRole": false,
+  "handler": "yoda/handler.handler",
+  "timeout": 30,
+  "memorySize": 128,
+  "authorizer": {},
+  "custom": {
+    "excludePatterns": []
+  },
+  "endpoints": [
+    {
+      "path": "yoda",
+      "method": "POST",
+      "type": "AWS",
+      "authorizationType": "none",
+      "authorizerFunction": false,
+      "apiKeyRequired": false,
+      "requestParameters": {},
+      "requestTemplates": "$${apiGatewayRequestTemplate}",
+      "responses": {
+        "400": {
+          "statusCode": "400"
+        },
+        "default": {
+          "statusCode": "200",
+          "responseParameters": {},
+          "responseModels": {
+            "application/json;charset=UTF-8": "Empty"
+          },
+          "responseTemplates": {
+            "application/json;charset=UTF-8": ""
+          }
+        }
+      }
+    }
+  ],
+  "events": [],
+  "environment": "$${environmentTemplate}",
+  "vpc": {
+    "securityGroupIds": [],
+    "subnetIds": []
+  }
+}

@@ -2,8 +2,8 @@
 
 var _ = require('lodash');
 var giphy = require('giphy-api')();
-var Promise = require('bluebird');
-var response = require('./response.json');
+var request = require('request');
+var response = require('../response.json');
 
 module.exports.handler = function(event, context) {
 
@@ -51,9 +51,23 @@ module.exports.handler = function(event, context) {
         if(url){
 
           //Send to Slack
-          result.response.outputSpeech.text = url;
+          var payload = {
+            text: url
+          };
 
-          return context.done(null, result);
+          request.post(process.env.SLACK_WEBHOOK_URL, {body: JSON.stringify(payload)}, function(err){
+            if(err){
+              console.error('err sending to slack:', err);
+              result.response.outputSpeech.text = "I'm sorry, but I had trouble sending that image to Slack.";
+            }
+            else{
+              result.response.outputSpeech.text = "I've posted to Slack.";
+            }
+
+            //Done!
+            return context.done(null, result);
+
+          });
 
         }
         else {

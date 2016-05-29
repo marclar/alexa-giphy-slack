@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "intent": "Yoda",
+      "slots": [
+        {
+          "name": "Keywords",
+          "type": "AMAZON.LITERAL"
+        }
+      ]
+    }
+  ]
+}
