@@ -1,0 +1,21 @@
+{
+  "intents": [
+    {
+      "intent": "ReadMyMind",
+      "slots": [
+        {
+          "name": "Statement",
+          "type": "LIST_OF_STATEMENTS"
+        },
+        {
+          "name": "Third",
+          "type": "LIST_OF_STATEMENTS"
+        },
+        {
+          "name": "Question",
+          "type": "LIST_OF_STATEMENTS"
+        }
+      ]
+    }
+  ]
+}
