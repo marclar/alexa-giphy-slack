@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "intent": "EightBall",
+      "slots": [
+        {
+          "name": "Keywords",
+          "type": "AMAZON.LITERAL"
+        }
+      ]
+    }
+  ]
+}
